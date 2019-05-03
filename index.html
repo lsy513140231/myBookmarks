@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>我的导航</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="main.js"></script>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <head></head>
+    <main>
+        <div class="wrapper" id="x">
+
+        </div>
+    </main>
+    <footer></footer>
+    <script>
+    keys = 
+    {
+        0:{0:'q',1:'w',2:'e',3:'r',4:'t',5:'y',6:'u',7:'i',8:'o',9:'p',length:10},
+        1:{0:'a',1:'s',2:'d',3:'f',4:'g',5:'h',6:'j',7:'k',8:'l',length:9},
+        2:{0:'z',1:'x',2:'c',3:'v',4:'b',5:'n',6:'m',length:7},
+        length: 3
+    }
+    hash =
+    {
+        'q':'qq.com',
+        'w':'weibo.com',
+        'e':'ele.me',
+        'r':'rentrn.com',
+        't':'tianya.com',
+        'y':'youtube.com',
+        'u':'uc.com',
+        'i':'iqiyi.com',
+        'o':'oprta.com',
+        'p':undefined,
+        'a':'acfun.tv',
+        's':'souhu.com',
+        'z':'zhihu.com',
+        'm':'mcdonalds.com.cn'
+    }
+    //div1 = document.createElement('div');
+    //x.appendChild(div1);
+    index = 0;
+    index1 = 0;
+    hashInlocalStorage = JSON.parse(localStorage.getItem('hash') || 'nul');
+    if(hashInlocalStorage)
+    {
+        hash = hashInlocalStorage;
+    }
+    
+    while(index<keys.length)
+    {
+        div = document.createElement('div');
+        x.appendChild(div);
+        index1 = 0;
+        while(index1<keys[index].length)
+        {
+            kbd = document.createElement('kbd');
+            div.appendChild(kbd);   
+            kbd.textContent = keys[index][index1];
+            btn = document.createElement('button');
+            btn.textContent="编辑";
+            btn.id = kbd.textContent;
+            btn.onclick = function(btnClick)
+            {
+                key = btnClick.target.id;
+                x = prompt('给我一个网址');
+                hash[key] = x;
+                localStorage.setItem('hash',JSON.stringify(hash));
+            }
+            kbd.appendChild(btn);   
+
+
+            index1 = index1 + 1;
+        }
+
+        index = index + 1;
+    }
+    document.onkeydown=function(keyCoud)
+    {
+        if(hash[keyCoud.key])
+        {
+            key = hash[keyCoud.key];
+            //location.href =  'http://' + key;
+            window.open('http://' + key,'_blank');
+        }
+        
+    }
+    </script>
+</body>
+</html>
